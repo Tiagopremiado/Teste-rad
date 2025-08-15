@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟢</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radar Aviator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+      body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+      }
+      .bg-grid-pattern {
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+        animation: pan-background 30s linear infinite;
+      }
+       .bg-grid-green-pattern {
+        background-image:
+          linear-gradient(rgba(163, 230, 53, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(163, 230, 53, 0.07) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+       .bg-login-pattern {
+        background-color: #020617; /* slate-950 */
+        background-image: 
+            radial-gradient(ellipse at center, rgba(163, 230, 53, 0.1) 0%, transparent 60%),
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: cover, 30px 30px;
+      }
+      @keyframes pan-background {
+        0% { background-position: 0 0; }
+        100% { background-position: 400px 400px; }
+      }
+      @keyframes gradient-pan {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .animate-gradient-pan {
+        background-size: 200% 200%;
+        animation: gradient-pan 3s ease infinite;
+      }
+      @keyframes scan-down {
+        from {
+            top: -10%;
+            opacity: 0.8;
+        }
+        to {
+            top: 110%;
+            opacity: 0;
+        }
+      }
+      .animate-scan-down {
+          animation: scan-down 1.5s ease-out forwards;
+      }
+      @keyframes pulse-strong {
+        0%, 100% {
+          transform: scale(1);
+          opacity: 0.8;
+          box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.7); /* lime-400 */
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 1;
+          box-shadow: 0 0 15px 10px rgba(163, 230, 53, 0);
+        }
+      }
+      .animate-pulse-strong {
+          animation: pulse-strong 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes radar-sweep {
+        0% { transform: rotate(0deg); opacity: 0.3; }
+        50% { opacity: 0.6; }
+        100% { transform: rotate(360deg); opacity: 0; }
+      }
+      .animate-radar-sweep {
+          animation: radar-sweep 2.5s linear infinite;
+      }
+      @keyframes pulse-glow {
+        0%, 100% {
+          box-shadow: 0 0 10px 2px var(--glow-color), 0 0 20px 5px var(--glow-color-faded);
+          opacity: 0.8;
+        }
+        50% {
+          box-shadow: 0 0 20px 5px var(--glow-color), 0 0 40px 10px var(--glow-color-faded);
+          opacity: 1;
+        }
+      }
+      .animate-pulse-glow {
+          animation: pulse-glow 1.5s ease-in-out infinite;
+      }
+       @keyframes pulse-clock-pink {
+        0%, 100% {
+          box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.4); /* lime-400 */
+          transform: scale(1);
+        }
+        50% {
+          box-shadow: 0 0 20px 8px rgba(163, 230, 53, 0);
+          transform: scale(1.02);
+        }
+      }
+      .animate-pulse-clock-pink {
+        animation: pulse-clock-pink 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse-clock-purple {
+        0%, 100% {
+          box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4); /* purple-500 */
+          transform: scale(1);
+        }
+        50% {
+          box-shadow: 0 0 20px 8px rgba(168, 85, 247, 0);
+          transform: scale(1.02);
+        }
+      }
+      .animate-pulse-clock-purple {
+        animation: pulse-clock-purple 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse-clock-pink-text {
+        0%, 100% {
+          text-shadow: 0 0 4px rgba(163, 230, 53, 0.7); /* lime-400 */
+          transform: scale(1);
+        }
+        50% {
+          text-shadow: 0 0 18px rgba(163, 230, 53, 1);
+          transform: scale(1.05);
+        }
+      }
+      .animate-pulse-clock-pink-text {
+        animation: pulse-clock-pink-text 1.8s ease-in-out infinite;
+      }
+       @keyframes pulse-clock-gold-text {
+        0%, 100% {
+          text-shadow: 0 0 5px rgba(163, 230, 53, 0.8); /* lime-400 */
+          transform: scale(1);
+        }
+        50% {
+          text-shadow: 0 0 20px rgba(132, 204, 22, 1);
+          transform: scale(1.05);
+        }
+      }
+      .animate-pulse-clock-gold-text {
+        animation: pulse-clock-gold-text 1.5s ease-in-out infinite;
+      }
+      @keyframes pulse-green-text-glow {
+        0%, 100% {
+          text-shadow: 0 0 8px rgba(163, 230, 53, 0.6), 0 0 16px rgba(163, 230, 53, 0.4);
+          transform: scale(1);
+        }
+        50% {
+          text-shadow: 0 0 16px rgba(163, 230, 53, 1), 0 0 32px rgba(163, 230, 53, 0.7);
+          transform: scale(1.02);
+        }
+      }
+      .animate-pulse-green-text-glow {
+        animation: pulse-green-text-glow 2.5s ease-in-out infinite;
+      }
+      @keyframes pulse-whatsapp {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); /* green-500 */
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 1;
+          box-shadow: 0 0 15px 10px rgba(34, 197, 94, 0);
+        }
+      }
+      .animate-pulse-whatsapp {
+          animation: pulse-whatsapp 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+       @keyframes target-pulse {
+        0%, 100% {
+          transform: scale(1);
+          text-shadow: 0 0 5px rgba(163, 230, 53, 0.5);
+        }
+        50% {
+          transform: scale(1.05);
+          text-shadow: 0 0 15px rgba(163, 230, 53, 1);
+        }
+      }
+      .animate-target-pulse {
+          animation: target-pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes hit-flash {
+        0% { background-color: rgba(34, 197, 94, 0); border-color: rgba(163, 230, 53, 0.3); } /* lime border */
+        50% { background-color: rgba(34, 197, 94, 0.5); border-color: rgba(74, 222, 128, 1); } /* green flash */
+        100% { background-color: rgba(34, 197, 94, 0); border-color: rgba(163, 230, 53, 0.3); }
+      }
+      .animate-hit-flash {
+          animation: hit-flash 1.5s ease-out;
+      }
+       @keyframes fade-out {
+          0% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0; transform: scale(1.2); }
+      }
+      .animate-fade-out {
+          animation: fade-out 1.5s ease-out forwards;
+      }
+      @keyframes counter-flash-green {
+        0% { transform: scale(1); color: #86efac; } /* green-300 */
+        50% { transform: scale(1.3); color: #ffffff; text-shadow: 0 0 12px #4ade80; }
+        100% { transform: scale(1); color: #86efac; }
+      }
+      .animate-counter-flash-green {
+          animation: counter-flash-green 0.8s ease-out;
+      }
+      @keyframes counter-flash-blue {
+        0% { transform: scale(1); color: #93c5fd; } /* blue-300 */
+        50% { transform: scale(1.3); color: #ffffff; text-shadow: 0 0 12px #60a5fa; }
+        100% { transform: scale(1); color: #93c5fd; }
+      }
+      .animate-counter-flash-blue {
+          animation: counter-flash-blue 0.8s ease-out;
+      }
+      @keyframes pulse-pattern {
+        0%, 100% {
+            box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.8); /* lime-400 */
+        }
+        50% {
+            box-shadow: 0 0 0 6px rgba(163, 230, 53, 0);
+        }
+      }
+      .animate-pulse-pattern {
+        animation: pulse-pattern 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse-critical {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+        50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      }
+      .animate-pulse-critical {
+        animation: pulse-critical 1.5s infinite;
+      }
+       @keyframes pulse-critical-purple {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7); }
+        50% { box-shadow: 0 0 0 10px rgba(168, 85, 247, 0); }
+      }
+      .animate-pulse-critical-purple {
+        animation: pulse-critical-purple 1.5s infinite;
+      }
+       @keyframes pulse-cyan {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7); } /* cyan-400 */
+        50% { box-shadow: 0 0 0 8px rgba(34, 211, 238, 0); }
+      }
+      .animate-pulse-cyan {
+        animation: pulse-cyan 2s infinite;
+      }
+       @keyframes fly-across {
+        0% { transform: translateX(-100%) scaleX(0.3); opacity: 0.7; }
+        30% { transform: translateX(50%) scaleX(1); opacity: 1; }
+        100% { transform: translateX(200%) scaleX(0.5); opacity: 0; }
+      }
+      .animate-fly-across {
+        animation: fly-across 1.5s ease-in-out forwards;
+      }
+      @keyframes fly-up-and-across {
+        0% { transform: translate(-100%, 50%) scaleX(0.5) rotate(-15deg); opacity: 0.5; }
+        30% { opacity: 1; }
+        50% { transform: translate(20%, -50%) scaleX(1) rotate(5deg); opacity: 1; }
+        100% { transform: translate(250%, -200%) scaleX(0.4) rotate(20deg); opacity: 0; }
+      }
+      .animate-fly-up-and-across {
+          animation: fly-up-and-across 1.8s ease-in-out forwards;
+      }
+      .bg-radial-rays {
+          background-color: #111;
+          background-image: radial-gradient(circle at 50% 150%, rgba(239, 68, 68, 0.15) 0%, transparent 50%), 
+                            repeating-conic-gradient(from -45deg at 50% 150%, rgba(255,255,255,0.02) 0deg 2deg, transparent 2deg 12deg);
+      }
+       @keyframes fade-in {
+        from { opacity: 0; } to { opacity: 1; }
+      }
+      .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
+       @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in-up { animation: fade-in-up 0.4s ease-out forwards; }
+      @keyframes block-highlight {
+        0% { background-color: transparent; }
+        50% { background-color: rgba(163, 230, 53, 0.2); }
+        100% { background-color: transparent; }
+      }
+      .animate-block-highlight {
+          animation: block-highlight 1.5s ease-out;
+      }
+      @keyframes pulse-suggestion {
+        0%, 100% {
+          box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); /* blue-500 */
+        }
+        50% {
+          box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+        }
+      }
+      .animate-pulse-suggestion {
+        animation: pulse-suggestion 2s infinite;
+      }
+      @keyframes pulse-opportunity {
+        0%, 100% {
+            box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.7); /* lime-400 */
+        }
+        50% {
+            box-shadow: 0 0 0 12px rgba(163, 230, 53, 0);
+        }
+      }
+      .animate-pulse-opportunity {
+          animation: pulse-opportunity 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse-neon-green {
+        0%, 100% {
+          box-shadow: 0 0 5px 2px rgba(163, 230, 53, 0.4); /* lime-400 */
+        }
+        50% {
+          box-shadow: 0 0 15px 5px rgba(163, 230, 53, 0.7);
+        }
+      }
+      .animate-pulse-neon-green {
+        animation: pulse-neon-green 2.5s infinite;
+      }
+      @keyframes pulse-blue-banner {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } /* blue-500 */
+        50% { box-shadow: 0 0 20px 10px rgba(59, 130, 246, 0); }
+      }
+      .animate-pulse-blue-banner {
+        animation: pulse-blue-banner 2s infinite;
+      }
+       @keyframes pulse-gold-banner {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); } /* amber-500 */
+        50% { box-shadow: 0 0 20px 10px rgba(245, 158, 11, 0); }
+      }
+      .animate-pulse-gold-banner {
+        animation: pulse-gold-banner 2s infinite;
+      }
+       @keyframes pulse-red-banner {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } /* red-500 */
+        50% { box-shadow: 0 0 20px 10px rgba(239, 68, 68, 0); }
+      }
+      .animate-pulse-red-banner {
+        animation: pulse-red-banner 1.5s infinite;
+      }
+      @keyframes toast-in {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      .animate-toast-in {
+        animation: toast-in 0.4s ease-out forwards;
+      }
+      @keyframes toast-out {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+      .animate-toast-out {
+        animation: toast-out 0.4s ease-in forwards;
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "recharts": "https://esm.sh/recharts@^3.1.2",
+    "@google/genai": "https://esm.sh/@google/genai@^1.13.0",
+    "xlsx": "https://esm.sh/xlsx@^0.18.5",
+    "jspdf-autotable": "https://esm.sh/jspdf-autotable@^5.0.2",
+    "jspdf": "https://esm.sh/jspdf@^3.0.1",
+    "vite": "https://esm.sh/vite@^7.1.2",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.0.0",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <audio id="notification-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" preload="auto"></audio>
+    <audio id="pink-pattern-alert-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-game-warning-2042.mp3" preload="auto"></audio>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

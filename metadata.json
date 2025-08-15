@@ -1,0 +1,8 @@
+{
+  "name": "Radar Aviator 3.5 BANCO DE DADOS",
+  "description": "Radar Aviator: Um sistema alimentado por IA para analisar padrões e sugerir estratégias para o jogo Aviator.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "prompt": ""
+}

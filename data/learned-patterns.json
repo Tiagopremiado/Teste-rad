@@ -1,0 +1,18 @@
+
+{
+  "highValueTriggers": [
+    "Observar a 'casa' (intervalo de jogadas) após uma rosa. Se uma casa específica (ex: casa 4) se repetir, ela pode se tornar um gatilho para a próxima rosa.",
+    "Uma sequência de 2-3 roxos com multiplicadores crescentes pode indicar um período de alta volatilidade e potencial para uma vela >100x."
+  ],
+  "streakPatterns": [
+    "A repetição de uma 'casa' rosa (ex: duas rosas consecutivas na casa 4) aumenta a probabilidade de uma terceira ocorrência na mesma casa ou em casas adjacentes (N-1 ou N+1).",
+    "Após uma sequência de mais de 10 azuis, a probabilidade de uma sequência de roxos aumenta significativamente antes da próxima rosa."
+  ],
+  "timeBasedPatterns": [
+    "Minutos quentes para rosas (ex: :15, :33, :45) devem ser observados, especialmente se coincidirem com um padrão de repetição de casa."
+  ],
+  "generalObservations": [
+    "A repetição de 'casas' é um forte indicador, mas não é uma regra absoluta. As repetições tendem a ocorrer em janelas de 50-100 rodadas.",
+    "Quando uma casa se repete, a chance de acontecer uma casa antes ou depois (N-1 ou N+1) na próxima ocorrência é elevada."
+  ]
+}
